@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Welcome to Dwaraka AUPS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    /* Base Styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Montserrat', sans-serif; /* Modern, clean font */
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(-45deg, #FF6B6B, #FFA46B, #6BD4FF, #6BFFB3); /* Vibrant, warm gradient */
+      background-size: 600% 600%;
+      animation: gradientShift 15s ease infinite; /* Slower, smoother shift */
+      color: #fff; /* White text for contrast */
+      text-align: center;
+      overflow: hidden; /* Prevent scrollbar from particle effect */
+    }
+
+    /* Animated Gradient Background */
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Title with Enhanced Glowing Effect */
+    h1 {
+      font-family: 'Pacifico', cursive; /* Elegant, script font for title */
+      font-size: 3.5em; /* Larger title */
+      color: #FFFFFF;
+      text-shadow: 0 0 15px rgba(0, 255, 213, 0.8), /* Stronger, more vibrant glow */
+                   0 0 30px rgba(0, 255, 213, 0.6),
+                   0 0 50px rgba(0, 255, 213, 0.4);
+      animation: glow 2.5s ease-in-out infinite alternate; /* Slower glow animation */
+      margin-bottom: 15px;
+      letter-spacing: 2px; /* Add some spacing for readability */
+    }
+
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 10px rgba(0, 255, 213, 0.7), 0 0 20px rgba(0, 255, 213, 0.5);
+      }
+      to {
+        text-shadow: 0 0 25px rgba(0, 255, 213, 1), 0 0 40px rgba(0, 255, 213, 0.8);
+      }
+    }
+
+    /* Date and Time Styling */
+    .datetime {
+      font-size: 1.3em;
+      margin-bottom: 25px; /* More space below date/time */
+      color: rgba(255, 255, 255, 0.9);
+      animation: fadeIn 2s ease;
+    }
+
+    /* Spinner - More prominent and reflective */
+    .spinner {
+      border: 10px solid rgba(255, 255, 255, 0.3); /* Softer outer border */
+      border-top: 10px solid #FFFFFF; /* Brighter, more defined top border */
+      border-radius: 50%;
+      width: 80px; /* Larger spinner */
+      height: 80px;
+      animation: spin 1.5s linear infinite; /* Slightly faster spin */
+      margin: 30px; /* More margin */
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.7); /* Stronger white glow */
+      transition: all 0.3s ease-in-out; /* Smooth hover transition */
+    }
+
+    .spinner:hover {
+        transform: rotate(360deg) scale(1.1); /* Zoom in on hover */
+        box-shadow: 0 0 30px rgba(255, 255, 255, 1);
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Information Boxes - Glassmorphism & Hover Effects */
+    .box {
+      max-width: 700px; /* Wider boxes */
+      margin: 15px; /* More vertical space between boxes */
+      padding: 20px 30px; /* More padding */
+      background: rgba(255, 255, 255, 0.2); /* Slightly more opaque glass */
+      border-radius: 20px; /* More rounded corners */
+      backdrop-filter: blur(10px); /* Stronger blur effect */
+      -webkit-backdrop-filter: blur(10px); /* For Safari */
+      font-size: 1.2em; /* Larger text */
+      border: 1px solid rgba(255, 255, 255, 0.3); /* Subtle white border */
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); /* Deeper shadow for depth */
+      animation: fadeIn 2s ease;
+      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smooth hover transition */
+    }
+
+    .box:hover {
+        transform: translateY(-5px); /* Lift up on hover */
+        box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.5); /* Enhanced shadow on hover */
+    }
+
+    /* Quote animation - More subtle and engaging */
+    #thought {
+      animation: pulseText 3s ease-in-out infinite alternate; /* Pulsing effect for thought */
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); } /* Fade in from lower position */
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulseText {
+      0% { opacity: 0.8; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.02); } /* Slight scale for pulse */
+      100% { opacity: 0.8; transform: scale(1); }
+    }
+
+    /* Confetti Particle Effect (Pure CSS) */
+    .confetti-container {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: -1; /* Behind other content */
+    }
+
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: #FFD700; /* Gold */
+      opacity: 0;
+      animation: confettiFall 10s linear infinite;
+    }
+
+    .confetti:nth-child(2n) { background-color: #FF69B4; } /* Hot Pink */
+    .confetti:nth-child(3n) { background-color: #00FFFF; } /* Aqua */
+    .confetti:nth-child(4n) { background-color: #ADFF2F; } /* Green Yellow */
+
+    @keyframes confettiFall {
+      0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 0;
+      }
+      10% { opacity: 1; }
+      100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      h1 { font-size: 2.5em; }
+      .datetime { font-size: 1.1em; }
+      .box { font-size: 1.05em; padding: 15px 20px; margin: 10px; }
+      .spinner { width: 60px; height: 60px; margin: 20px;}
+    }
+
+    @media (max-width: 480px) {
+      h1 { font-size: 2em; letter-spacing: 1px; }
+      .datetime { font-size: 1em; }
+      .box { font-size: 0.95em; padding: 10px 15px; margin: 8px; border-radius: 15px;}
+      .spinner { width: 50px; height: 50px; margin: 15px;}
+    }
+  </style>
+</head>
+<body>
+
+  <div class="confetti-container" id="confetti-container"></div>
+
+  <h1>Welcome to MTDM</h1>
+  <div class="datetime" id="currentDateTime">Loading date and time...</div>
+  <div class="spinner"></div>
+  <div class="box" id="speciality">Loading today’s speciality...</div>
+  <div class="box" id="thought">Loading motivational thought...</div>
+
+  <script>
+    // Function to update date and time
+    function updateDateTime() {
+      const today = new Date();
+      const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true }; // Added seconds and AM/PM
+
+      const dateString = today.toLocaleDateString('en-IN', dateOptions);
+      const timeString = today.toLocaleTimeString('en-IN', timeOptions);
+
+      document.getElementById("currentDateTime").textContent = `${dateString} | ${timeString}`;
+    }
+
+    // Call it once to set initial values
+    updateDateTime();
+    // Update every second to keep time accurate
+    setInterval(updateDateTime, 1000);
+
+    // Special Days
+    const specialDays = {
+      "01-01": "New Year’s Day 🎉",
+      "01-26": "Republic Day 🇮🇳",
+      "02-14": "Valentine’s Day ❤️",
+      "03-08": "International Women’s Day empowerHER",
+      "04-07": "World Health Day 🌍",
+      "04-22": "Earth Day 🌳",
+      "05-01": "Labor Day 🛠️",
+      "06-05": "World Environment Day ♻️",
+      "06-14": "World Blood Donor Day 🩸",
+      "07-01": "Doctor’s Day 🩺",
+      "08-15": "Independence Day 🇮🇳",
+      "09-05": "Teacher’s Day 🍎",
+      "10-02": "Gandhi Jayanti 🕊️",
+      "11-14": "Children’s Day 🎈",
+      "12-25": "Christmas Day 🎄"
+    };
+
+    const today = new Date(); // Re-declare today for speciality logic
+    const key = ("0" + (today.getMonth() + 1)).slice(-2) + "-" + ("0" + today.getDate()).slice(-2);
+    const speciality = specialDays[key] || "Have a joyful day of learning! 📚"; // Added an emoji
+    document.getElementById("speciality").textContent = "Speciality Today: " + speciality;
+
+    // Motivational Thoughts
+    const thoughts = [
+      "You are stronger than you think. 💪",
+      "Mistakes are proof you are trying. ✨",
+      "Every day is a new opportunity. ☀️",
+      "Be kind. Work hard. Stay humble. 🌟",
+      "Your only limit is your mind. 🧠",
+      "Keep going. You’re getting there. 🚀",
+      "Dream it. Believe it. Achieve it. 🎯",
+      "Success begins with self-belief. 💡",
+      "Learn something new every day. 📖",
+      "Make today count. ✅",
+    ];
+
+    // Select a random thought
+    const randomThought = thoughts[Math.floor(Math.random() * thoughts.length)];
+    document.getElementById("thought").textContent = "Thought of the Day: " + randomThought;
+
+    // Confetti generation (JavaScript)
+    const confettiContainer = document.getElementById('confetti-container');
+    const numberOfConfetti = 50; // Adjust as needed
+
+    for (let i = 0; i < numberOfConfetti; i++) {
+      const confetti = document.createElement('div');
+      confetti.classList.add('confetti');
+      confetti.style.left = `${Math.random() * 100}vw`;
+      confetti.style.animationDelay = `${Math.random() * 2}s`; /* Stagger animations */
+      confetti.style.animationDuration = `${2 + Math.random() * 2}s`; /* Vary fall speed */
+      confettiContainer.appendChild(confetti);
+    }
+
+    // Redirect after 5 seconds to actual login page
+    setTimeout(() => {
+      window.location.href = "https://script.google.com/macros/s/AKfycbxYtPHCVv2HLvwqsPGDY0f0U-UldDngn7Fud8Veom2CAEW3w3zpNFZLtZ7WuOp9m4Jr/exec";
+    }, 3000); // Changed to 5000 milliseconds (3 seconds)
+  </script>
+</body>
+</html>
